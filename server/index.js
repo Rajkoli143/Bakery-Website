@@ -1,35 +1,71 @@
 const express = require('express');
 const cors = require('cors');
-const Razorpay = require('razorpay');
 const path = require('path');
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+// CORS configuration
+const corsOptions = {
+    origin: process.env.CORS_ORIGIN || 'https://rajkoli143.github.io',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../')));
 
-// Initialize Razorpay
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET
+let razorpay;
+try {
+    // Initialize Razorpay
+    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+        console.warn('Warning: Razorpay credentials not found in environment variables');
+    } else {
+        const Razorpay = require('razorpay');
+        razorpay = new Razorpay({
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret: process.env.RAZORPAY_KEY_SECRET
+        });
+    }
+} catch (error) {
+    console.error('Error initializing Razorpay:', error);
+}
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({ 
+        status: 'healthy',
+        razorpayInitialized: !!razorpay
+    });
 });
 
 // Get Razorpay key endpoint
 app.get('/get-razorpay-key', (req, res) => {
+    if (!process.env.RAZORPAY_KEY_ID) {
+        return res.status(500).json({ error: 'Razorpay not configured' });
+    }
     res.json({ key: process.env.RAZORPAY_KEY_ID });
 });
 
 // Create order endpoint
 app.post('/create-order', async (req, res) => {
+    if (!razorpay) {
+        return res.status(500).json({ error: 'Payment service not configured' });
+    }
+
     try {
         const { amount, currency } = req.body;
         
+        if (!amount) {
+            return res.status(400).json({ error: 'Amount is required' });
+        }
+
         const options = {
-            amount: amount * 100, // Convert to paise
+            amount: Math.round(amount * 100), // Convert to paise
             currency: currency || 'INR',
             receipt: `order_${Date.now()}`
         };
@@ -120,9 +156,20 @@ app.post('/process-card-payment', async (req, res) => {
 
 // Verify payment endpoint
 app.post('/verify-payment', async (req, res) => {
+    if (!razorpay) {
+        return res.status(500).json({ error: 'Payment service not configured' });
+    }
+
     try {
         const { order_id, payment_id, signature } = req.body;
         
+        if (!order_id || !payment_id || !signature) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Missing required parameters' 
+            });
+        }
+
         const crypto = require('crypto');
         const body = order_id + "|" + payment_id;
         const expectedSignature = crypto
@@ -130,11 +177,12 @@ app.post('/verify-payment', async (req, res) => {
             .update(body.toString())
             .digest('hex');
 
-        if (expectedSignature === signature) {
-            res.json({ success: true, message: 'Payment verified successfully' });
-        } else {
-            res.status(400).json({ success: false, message: 'Invalid payment signature' });
-        }
+        const isValid = expectedSignature === signature;
+        
+        res.json({ 
+            success: isValid, 
+            message: isValid ? 'Payment verified successfully' : 'Invalid payment signature'
+        });
     } catch (error) {
         console.error('Error verifying payment:', error);
         res.status(500).json({ error: 'Failed to verify payment' });
@@ -144,10 +192,14 @@ app.post('/verify-payment', async (req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ error: 'Something went wrong!' });
+    res.status(500).json({ 
+        error: 'Something went wrong!',
+        message: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
 });
 
 // Start server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+    console.log(`Razorpay initialized: ${!!razorpay}`);
 }); 
