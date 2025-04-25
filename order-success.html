@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success - Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .success-section {
+            padding: 4rem 0;
+            min-height: calc(100vh - 200px);
+            text-align: center;
+        }
+
+        .success-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-message {
+            margin-bottom: 2rem;
+        }
+
+        .success-message h1 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .back-to-shop {
+            display: inline-block;
+            background: linear-gradient(135deg, #5a7d7c, #4a6b6a);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-shop:hover {
+            background: linear-gradient(135deg, #4a6b6a, #3a5a59);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img href="index.html" src="images/ChatGPT Image Apr 14, 2025, 08_14_22 PM.png" alt="Bakery Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="recipe.html">Recipe<span class="new-badge">NEW</span></a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="cart.html"><img src="images/bakery.png" alt="Cart"></a>
+                <a href="#" class="search-toggle"><img src="images/search.png" alt="Search"></a>
+                <a href="wishlist.html"><img src="images/wishlist.png" alt="Wishlist"></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="success-section">
+            <div class="container">
+                <div class="success-container">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="success-message">
+                        <h1>Thank You for Your Order!</h1>
+                        <p>Your payment has been processed successfully. We'll send you an email confirmation with your order details shortly.</p>
+                    </div>
+                    <a href="shop.html" class="back-to-shop">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bakery. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

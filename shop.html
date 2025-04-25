@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 2rem 0;
+        }
+
+        .product-item {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-item:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-price {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #5a7d7c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-content h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #4a4a4a;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            font-size: 0.8em;
+            color: #777;
+        }
+
+        .product-excerpt {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .add-to-cart {
+            display: inline-block;
+            color: #5a7d7c;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .add-to-cart::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #5a7d7c;
+            transition: width 0.3s ease;
+        }
+
+        .add-to-cart:hover::after {
+            width: 100%;
+        }
+
+        .wishlist-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #5a7d7c;
+            font-size: 1.2em;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .wishlist-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .wishlist-btn.active {
+            color: #e74c3c;
+        }
+
+        .product-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 992px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Search Overlay Styles */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 100px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .search-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .search-container {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 30px;
+            background: white;
+            color: #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(90, 125, 124, 0.3);
+        }
+
+        .close-search {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+        }
+
+        .close-search:hover {
+            color: #5a7d7c;
+        }
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .search-result-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .search-result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .search-result-details h3 {
+            margin: 0 0 0.25rem 0;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .search-result-details p {
+            margin: 0;
+            color: #5a7d7c;
+            font-weight: 600;
+        }
+
+        /* Loading indicator */
+        .search-loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        /* No results message */
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/ChatGPT Image Apr 14, 2025, 08_14_22 PM.png" alt="Bakery Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="recipe.html">Recipe<span class="new-badge">NEW</span></a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="cart.html"><img src="images/bakery.png" alt="Cart"></a>
+                <a href="#" class="search-toggle"><img src="images/search.png" alt="Search"></a>
+                <a href="wishlist.html"><img src="images/wishlist.png" alt="Wishlist"></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="shop-section">
+            <div class="container">
+                <h1 class="animate__animated animate__fadeIn">Our Products</h1>
+                <div class="product-filters animate__animated animate__fadeIn">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="bread">Bread</button>
+                    <button class="filter-btn" data-filter="pastries">Pastries</button>
+                    <button class="filter-btn" data-filter="cakes">Cakes</button>
+                </div>
+
+                <div class="product-grid">
+                    <!-- Bread Products -->
+                    <article class="product-item animate__animated animate__fadeInUp" data-category="bread">
+                        <div class="product-image">
+                            <img src="images/pumpernickel.webp" alt="Pumpernickel">
+                            <div class="product-price">$3.0</div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Pumpernickel</h3>
+                            <div class="product-meta">
+                                <span>Fresh Daily</span>
+                                <span>•</span>
+                                <span>100% Natural</span>
+                            </div>
+                            <p class="product-excerpt">Classic German-style dark rye bread, perfect for sandwiches.</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                                <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-item animate__animated animate__fadeInUp" data-category="bread">
+                        <div class="product-image">
+                            <img src="images/pretzels.webp" alt="Pretzel">
+                            <div class="product-price">$7.2</div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Pretzel</h3>
+                            <div class="product-meta">
+                                <span>Handcrafted</span>
+                                <span>•</span>
+                                <span>Traditional</span>
+                            </div>
+                            <p class="product-excerpt">Soft, chewy pretzels with a perfectly golden crust.</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                                <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Pastry Products -->
+                    <article class="product-item animate__animated animate__fadeInUp" data-category="pastries">
+                        <div class="product-image">
+                            <img src="images/Croissant.webp" alt="Croissant">
+                            <div class="product-price">$3.5</div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Croissant</h3>
+                            <div class="product-meta">
+                                <span>Buttery</span>
+                                <span>•</span>
+                                <span>Flaky</span>
+                            </div>
+                            <p class="product-excerpt">Light and flaky croissants made with pure butter.</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                                <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-item animate__animated animate__fadeInUp" data-category="pastries">
+                        <div class="product-image">
+                            <img src="images/Danish.webp" alt="Danish">
+                            <div class="product-price">$4.5</div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Danish</h3>
+                            <div class="product-meta">
+                                <span>Fresh Fruit</span>
+                                <span>•</span>
+                                <span>Sweet</span>
+                            </div>
+                            <p class="product-excerpt">Delicate pastry filled with sweet cream and fresh fruits.</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                                <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Cake Products -->
+                    <article class="product-item animate__animated animate__fadeInUp" data-category="cakes">
+                        <div class="product-image">
+                            <img src="images/Chocolate Cake.webp" alt="Chocolate Cake">
+                            <div class="product-price">$20.0</div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Chocolate Cake</h3>
+                            <div class="product-meta">
+                                <span>Rich</span>
+                                <span>•</span>
+                                <span>Decadent</span>
+                            </div>
+                            <p class="product-excerpt">Rich chocolate layers with smooth ganache frosting.</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                                <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-item animate__animated animate__fadeInUp" data-category="cakes">
+                        <div class="product-image">
+                            <img src="images/Cheesecake.jpg" alt="Cheesecake">
+                            <div class="product-price">$18.0</div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Cheesecake</h3>
+                            <div class="product-meta">
+                                <span>Creamy</span>
+                                <span>•</span>
+                                <span>Classic</span>
+                            </div>
+                            <p class="product-excerpt">Smooth and creamy New York style cheesecake.</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                                <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bakery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/shop.js"></script>
+    <script src="js/global-search.js"></script>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search for products...">
+            <button class="close-search">×</button>
+            <div class="search-results"></div>
+        </div>
+    </div>
+</body>
+</html>

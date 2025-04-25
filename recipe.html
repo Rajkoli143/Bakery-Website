@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes - Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <div class="top-bar"></div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/ChatGPT Image Apr 14, 2025, 08_14_22 PM.png" alt="Bakery Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="recipe.html" class="active">Recipe<span class="new-badge">NEW</span></a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="cart.html"><img src="images/bakery.png" alt="Cart"></a>
+                <a href="#" class="search-toggle"><img src="images/search.png" alt="Search"></a>
+                <a href="wishlist.html"><img src="images/wishlist.png" alt="Wishlist"></a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="recipe-section">
+            <div class="container">
+                <h1 class="animate__animated animate__fadeIn">Our Recipes</h1>
+                <p class="section-intro animate__animated animate__fadeIn">Try our delicious recipes at home and bring the bakery experience to your kitchen!</p>
+                
+                <div class="recipe-filters animate__animated animate__fadeIn">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="bread">Bread</button>
+                    <button class="filter-btn" data-filter="pastries">Pastries</button>
+                    <button class="filter-btn" data-filter="cookies">Cookies</button>
+                    <button class="filter-btn" data-filter="cakes">Cakes</button>
+                </div>
+                
+                <div class="recipe-grid">
+                    <article class="recipe-card animate__animated animate__fadeInUp" data-category="bread">
+                        <div class="recipe-image">
+                            <img src="images/Sourdough Bread.jpeg" alt="Sourdough Bread">
+                            <div class="recipe-difficulty">Easy</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h2>Classic Sourdough Bread</h2>
+                            <div class="recipe-meta">
+                                <span><i class="time-icon"></i> 24 hours</span>
+                                <span><i class="servings-icon"></i> 1 loaf</span>
+                            </div>
+                            <p class="recipe-excerpt">Our signature sourdough bread recipe with a crispy crust and chewy interior.</p>
+                            <a href="#" class="view-recipe-btn">View Recipe</a>
+                        </div>
+                    </article>
+                    
+                    <article class="recipe-card animate__animated animate__fadeInUp" data-category="pastries" style="animation-delay: 0.2s;">
+                        <div class="recipe-image">
+                            <img src="images/Croissant.webp" alt="Croissants">
+                            <div class="recipe-difficulty">Medium</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h2>Butter Croissants</h2>
+                            <div class="recipe-meta">
+                                <span><i class="time-icon"></i> 8 hours</span>
+                                <span><i class="servings-icon"></i> 12 croissants</span>
+                            </div>
+                            <p class="recipe-excerpt">Flaky, buttery croissants that melt in your mouth. Perfect for breakfast or brunch.</p>
+                            <a href="#" class="view-recipe-btn">View Recipe</a>
+                        </div>
+                    </article>
+                    
+                    <article class="recipe-card animate__animated animate__fadeInUp" data-category="cookies" style="animation-delay: 0.4s;">
+                        <div class="recipe-image">
+                            <img src="images/chocolate_chip_cookie.webp" alt="Chocolate Chip Cookies">
+                            <div class="recipe-difficulty">Easy</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h2>Chocolate Chip Cookies</h2>
+                            <div class="recipe-meta">
+                                <span><i class="time-icon"></i> 30 minutes</span>
+                                <span><i class="servings-icon"></i> 24 cookies</span>
+                            </div>
+                            <p class="recipe-excerpt">Classic chocolate chip cookies with a crispy edge and chewy center.</p>
+                            <a href="#" class="view-recipe-btn">View Recipe</a>
+                        </div>
+                    </article>
+                    
+                    <article class="recipe-card animate__animated animate__fadeInUp" data-category="cakes" style="animation-delay: 0.6s;">
+                        <div class="recipe-image">
+                            <img src="images/carrot_cake.jpg" alt="Carrot Cake">
+                            <div class="recipe-difficulty">Medium</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h2>Carrot Cake</h2>
+                            <div class="recipe-meta">
+                                <span><i class="time-icon"></i> 1.5 hours</span>
+                                <span><i class="servings-icon"></i> 12 servings</span>
+                            </div>
+                            <p class="recipe-excerpt">Moist carrot cake with cream cheese frosting and a hint of cinnamon.</p>
+                            <a href="#" class="view-recipe-btn">View Recipe</a>
+                        </div>
+                    </article>
+                    
+                    <article class="recipe-card animate__animated animate__fadeInUp" data-category="bread" style="animation-delay: 0.8s;">
+                        <div class="recipe-image">
+                            <img src="images/Focaccia Bread.jpg" alt="Focaccia Bread">
+                            <div class="recipe-difficulty">Easy</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h2>Rosemary Focaccia</h2>
+                            <div class="recipe-meta">
+                                <span><i class="time-icon"></i> 3 hours</span>
+                                <span><i class="servings-icon"></i> 8 servings</span>
+                            </div>
+                            <p class="recipe-excerpt">Italian-style focaccia bread with fresh rosemary and sea salt.</p>
+                            <a href="#" class="view-recipe-btn">View Recipe</a>
+                        </div>
+                    </article>
+                    
+                    <article class="recipe-card animate__animated animate__fadeInUp" data-category="pastries" style="animation-delay: 1s;">
+                        <div class="recipe-image">
+                            <img src="images/Apple Turnovers.webp" alt="Apple Turnovers">
+                            <div class="recipe-difficulty">Medium</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h2>Apple Turnovers</h2>
+                            <div class="recipe-meta">
+                                <span><i class="time-icon"></i> 1 hour</span>
+                                <span><i class="servings-icon"></i> 8 turnovers</span>
+                            </div>
+                            <p class="recipe-excerpt">Flaky pastry turnovers filled with spiced apple filling.</p>
+                            <a href="#" class="view-recipe-btn">View Recipe</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bakery. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/recipe.js"></script>
+</body>
+</html>

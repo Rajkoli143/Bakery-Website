@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <div class="top-bar"></div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/ChatGPT Image Apr 14, 2025, 08_14_22 PM.png" alt="Bakery Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="recipe.html">Recipe<span class="new-badge">NEW</span></a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="cart.html"><img src="images/bakery.png" alt="Cart"></a>
+                <a href="#" class="search-toggle"><img src="images/search.png" alt="Search"></a>
+                <a href="wishlist.html"><img src="images/wishlist.png" alt="Wishlist"></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-container">
+            <button class="close-search">&times;</button>
+            <input type="text" class="search-input" placeholder="Search products...">
+            <div class="search-results"></div>
+        </div>
+    </div>
+
+    <main>
+        <section class="blog-section">
+            <div class="container">
+                <h1 class="animate__animated animate__fadeIn">Our Blog</h1>
+                <div class="blog-grid">
+                    <article class="blog-card animate__animated animate__fadeInUp">
+                        <div class="blog-image">
+                            <img src="images/Sourdough Bread.jpeg" alt="Sourdough Bread">
+                            <div class="blog-date">
+                                <span class="day">15</span>
+                                <span class="month">Apr</span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <h2>The Art of Sourdough Bread Making</h2>
+                            <p class="blog-meta">By John Baker | 5 min read</p>
+                            <p class="blog-excerpt">Learn the secrets behind our signature sourdough bread and how we maintain our century-old starter culture.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+                    <article class="blog-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                        <div class="blog-image">
+                            <img src="images/pastry.jpg" alt="Pastry Making">
+                            <div class="blog-date">
+                                <span class="day">10</span>
+                                <span class="month">Apr</span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <h2>Perfect Pastries: Tips from Our Pastry Chef</h2>
+                            <p class="blog-meta">By Sarah Pastry | 7 min read</p>
+                            <p class="blog-excerpt">Discover the techniques our pastry chef uses to create flaky, buttery pastries that melt in your mouth.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+                    <article class="blog-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                        <div class="blog-image">
+                            <img src="images/Seasonal Ingredients.avif" alt="Seasonal Ingredients">
+                            <div class="blog-date">
+                                <span class="day">05</span>
+                                <span class="month">Apr</span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <h2>Seasonal Ingredients: Spring Edition</h2>
+                            <p class="blog-meta">By Mike Ingredients | 4 min read</p>
+                            <p class="blog-excerpt">Explore the fresh, seasonal ingredients we're using this spring to create our limited-time offerings.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bakery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/blog.js"></script>
+    <script src="js/global-search.js"></script>
+</body>
+</html>

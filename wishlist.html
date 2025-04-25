@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/wishlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="top-bar"></div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/ChatGPT Image Apr 14, 2025, 08_14_22 PM.png" alt="Bakery Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="recipe.html">Recipe<span class="new-badge">NEW</span></a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="cart.html"><img src="images/bakery.png" alt="Cart"></a>
+                <a href="#" class="search-toggle"><img src="images/search.png" alt="Search"></a>
+                <a href="wishlist.html" class="active"><img src="images/wishlist.png" alt="Wishlist"></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="wishlist-section">
+            <div class="container">
+                <h1 class="animate__animated animate__fadeIn">My Wishlist</h1>
+                
+                <div class="wishlist-container animate__animated animate__fadeIn">
+                    <div class="wishlist-items">
+                        <!-- Wishlist items will be dynamically added here -->
+                    </div>
+                </div>
+
+                <div class="empty-wishlist animate__animated animate__fadeIn">
+                    <i class="fas fa-heart"></i>
+                    <h2>Your wishlist is empty</h2>
+                    <p>Save items you love to your wishlist and review them anytime.</p>
+                    <a href="shop.html" class="continue-shopping">Start Shopping</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search for products...">
+            <button class="close-search">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="search-results">
+                <!-- Search results will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bakery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/wishlist.js"></script>
+    <script src="js/global-search.js"></script>
+</body>
+</html> 

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <div class="top-bar"></div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/ChatGPT Image Apr 14, 2025, 08_14_22 PM.png" alt="Bakery Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="recipe.html">Recipe<span class="new-badge">NEW</span></a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="cart.html"><img src="images/bakery.png" alt="Cart"></a>
+                <a href="#" class="search-toggle"><img src="images/search.png" alt="Search"></a>
+                <a href="wishlist.html"><img src="images/wishlist.png" alt="Wishlist"></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-container">
+            <button class="close-search">&times;</button>
+            <input type="text" class="search-input" placeholder="Search products...">
+            <div class="search-results"></div>
+        </div>
+    </div>
+
+    <main>
+        <section class="about-section">
+            <div class="container">
+                <h1 class="animate__animated animate__fadeIn">About Our Bakery</h1>
+                <div class="about-content">
+                    <div class="about-text animate__animated animate__fadeInLeft">
+                        <p>Welcome to our bakery! We are passionate about creating delicious, fresh-baked goods that bring joy to our customers. Our journey began with a simple love for baking and has grown into a beloved local establishment.</p>
+                        <p>Every day, our skilled bakers arrive before dawn to prepare fresh breads, pastries, and other treats using only the finest ingredients. We believe in traditional baking methods combined with modern innovation to create unique and memorable flavors.</p>
+                    </div>
+                    <div class="about-image animate__animated animate__fadeInRight">
+                        <img src="images/bakery_int.png" alt="Our Bakery Interior" class="bakery-interior-img animate__animated animate__zoomIn animate__delay-1s">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bakery. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/about.js"></script>
+    <script src="js/global-search.js"></script>
+</body>
+</html>

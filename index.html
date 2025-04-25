@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 160px);
+            grid-template-rows: repeat(2, 160px);
+            gap: 30px;
+            transform: rotate(-45deg);
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            margin-left: 50px;
+        }
+
+        .diamond {
+            width: 160px;
+            height: 160px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .diamond img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: rotate(45deg) scale(1.4);
+            border-radius: 12px;
+            transition: 0.4s ease;
+            position: absolute;
+        }
+
+        .diamond:hover img {
+            scale: 1.1;
+            filter: brightness(1.1);
+        }
+
+        .gallery-button {
+    text-align: center;
+    margin-top: 120px;
+    transform: rotate(45deg);
+    position: relative;
+    z-index: 10;
+}
+.more-button {
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+}
+
+.more-button .btn-more {
+    background: linear-gradient(135deg, #5a7d7c, #4a6b6a);
+    padding: 10px 25px;
+    border-radius: 25px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9em;
+    box-shadow: 0 4px 8px rgba(90, 125, 124, 0.2);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.more-button .btn-more:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.more-button .btn-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(90, 125, 124, 0.3);
+    background: linear-gradient(135deg, #4a6b6a, #3a5a59);
+}
+
+.more-button .btn-more:hover:before {
+    left: 100%;
+}
+
+.more-button .btn-more img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.more-button .btn-more:hover img {
+    transform: translateX(2px);
+}
+    
+            
+        
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img href="index.html" src="images/ChatGPT Image Apr 14, 2025, 08_14_22 PM.png"" alt="Bakery Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="recipe.html">Recipe<span class="new-badge">NEW</span></a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="cart.html"><img src="images/bakery.png" alt="Cart"></a>
+                <a href="#" class="search-toggle"><img src="images/search.png" alt="Search"></a>
+                <a href="wishlist.html"><img src="images/wishlist.png" alt="Wishlist"></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="search-container">
+            <button class="close-search">&times;</button>
+            <input type="text" class="search-input" placeholder="Search products...">
+            <div class="search-results"></div>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Let us bake a <span class="highlight">Sweet</span> memory for you!</h1>
+                    <p>Founded upon a passion for food and baking, The Bakery has become a one-stop shop for all kinds of delectable, gorgeous baked goods and then some.</p>
+                    <a href="shop.html" class="btn btn-primary">
+                        <img src="images/shopping-bag.png" alt="Cart" > Let's Go Shopping 
+                    </a>
+                </div>
+                <div class="hero-image">
+                    <div class="gallery">
+                        <div class="diamond"><img src="images/pumpernickel.jpg" alt="Pumpernickel"></div>
+                        <div class="diamond"><img src="images/pretzels.jpg" alt="Pretzel"></div>
+                        <div class="diamond"><img src="images/Baguette.jpg" alt="Baguette"></div>
+                        <div class="diamond"><img src="images/Whole Wheat.jpg" alt="Whole Wheat"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="daily-bake">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Daily Bake</h2>
+                    <div class="more-button">
+                        <a href="shop.html" class="btn-more">
+                            More Products <img src="images/arrow-icon.png" alt="Arrow">
+                        </a>
+                    </div>
+                </div>
+                <div class="product-grid">
+                    <div class="product-item">
+                        <img src="images/pumpernickel.jpg" alt="Pumpernickel">
+                        <h3>Pumpernickel</h3>
+                        <p class="price">
+                            <span class="old-price">$5.0</span>
+                            <span>$3.0</span>
+                        </p>
+                    </div>
+                    <div class="product-item">
+                        <img src="images/pretzels.jpg" alt="Pretzel">
+                        <h3>Pretzel</h3>
+                        <p class="price">
+                            <span class="old-price">$9.2</span>
+                            <span>$7.2</span>
+                        </p>
+                    </div>
+                    <div class="product-item">
+                        <img src="images/Baguette.jpg" alt="Baguette">
+                        <h3>Baguette</h3>
+                        <p class="price">
+                            <span class="old-price">$5.0</span>
+                            <span>$3.0</span>
+                        </p>
+                    </div>
+                    <div class="product-item">
+                        <img src="images/Whole Wheat.jpg" alt="Whole Wheat">
+                        <h3>Whole Wheat</h3>
+                        <p class="price">
+                            <span class="old-price">$5.0</span>
+                            <span>$3.0</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/global-search.js"></script>
+</body>
+</html>
