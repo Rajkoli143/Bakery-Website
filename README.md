@@ -30,6 +30,11 @@ A modern, responsive bakery website with e-commerce functionality, built with HT
   - Cart management
   - Product categories
 
+## Live Demo
+
+- Frontend: [https://rajkoli143.github.io/Bakery-Website-new/](https://rajkoli143.github.io/Bakery-Website-new/)
+- Backend: [Your Render URL]
+
 ## Pages
 
 1. **Home** (`index.html`)
@@ -74,32 +79,60 @@ A modern, responsive bakery website with e-commerce functionality, built with HT
 
 ## Setup Instructions
 
+### Local Development
+
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/bakery-website.git
-   cd bakery-website
+   git clone https://github.com/Rajkoli143/Bakery-Website.git
+   cd Bakery-Website
    ```
 
 2. **Install dependencies**
    ```bash
+   cd server
    npm install
    ```
 
 3. **Set up environment variables**
-   Create a `.env` file in the root directory with:
+   Create a `.env` file in the server directory with:
    ```
    RAZORPAY_KEY_ID=your_razorpay_key_id
    RAZORPAY_KEY_SECRET=your_razorpay_key_secret
    PORT=3000
+   MONGODB_URI=your_mongodb_connection_string
+   FRONTEND_URL=http://localhost:5500
    ```
 
 4. **Start the server**
    ```bash
-   node server/index.js
+   node index.js
    ```
 
 5. **Access the website**
-   Open `http://localhost:3000` in your browser
+   Open `index.html` in your browser or use a local server
+
+### Deployment
+
+#### Backend Deployment (Render.com)
+
+1. Create a new Web Service on Render
+2. Connect your GitHub repository
+3. Configure the service:
+   - Root Directory: `server`
+   - Build Command: `npm install`
+   - Start Command: `node index.js`
+4. Add Environment Variables:
+   - `PORT`: 3000
+   - `RAZORPAY_KEY_ID`: Your Razorpay key ID
+   - `RAZORPAY_KEY_SECRET`: Your Razorpay secret key
+   - `MONGODB_URI`: Your MongoDB connection string
+   - `FRONTEND_URL`: Your frontend URL
+
+#### Frontend Deployment (GitHub Pages)
+
+1. Push your code to GitHub
+2. Enable GitHub Pages in repository settings
+3. Your site will be available at 'https://rajkoli143.github.io/Bakery-Website-new/'
 
 ## Payment Integration
 
@@ -107,7 +140,7 @@ The website uses Razorpay for payment processing. To enable payments:
 
 1. Sign up for a Razorpay account
 2. Get your API keys from the Razorpay dashboard
-3. Add the keys to your `.env` file
+3. Add the keys to your environment variables
 4. Test payments using Razorpay's test credentials
 
 ## File Structure
@@ -166,11 +199,19 @@ bakery-website/
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## Important Notes
+
+- The backend server on Render's free tier will sleep after 15 minutes of inactivity
+- First request after inactivity may take 30-50 seconds to respond
+- For production use, consider upgrading to a paid tier for consistent performance
+
 ## Support
 
-For support, email support@bakery.com or open an issue in the repository.
+For support, please open an issue in the repository.
 
 ## Acknowledgments
 
 - Razorpay for payment processing
+- Render.com for backend hosting
+- GitHub Pages for frontend hosting
 - All contributors who have helped with the project 

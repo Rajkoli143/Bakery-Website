@@ -1,18 +1,25 @@
 {
-  "name": "server",
+  "name": "bakery-website-server",
   "version": "1.0.0",
+  "description": "Backend server for Bakery Website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "razorpay": "^2.9.6"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "razorpay": "^2.8.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
