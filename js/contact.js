@@ -1,80 +1,111 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('.contact-form form');
+    const contactForm = document.querySelector('#contactForm');
     const formGroups = document.querySelectorAll('.form-group');
     const submitBtn = document.querySelector('.submit-btn');
 
-    // Add animation classes to form elements
+    // Add animation to form groups
     formGroups.forEach((group, index) => {
         group.style.opacity = '0';
         group.style.transform = 'translateY(20px)';
+        group.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
         setTimeout(() => {
-            group.style.transition = 'all 0.5s ease';
             group.style.opacity = '1';
             group.style.transform = 'translateY(0)';
         }, 200 * index);
     });
 
+    // Add hover effect to submit button
+    if (submitBtn) {
+        submitBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.backgroundColor = '#e67e22';
+        });
+
+        submitBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.backgroundColor = '#d35400';
+        });
+    }
+
     // Form submission handling
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-        // Get form values
-        const formData = {
-            name: this.querySelector('input[name="name"]').value,
-            email: this.querySelector('input[name="email"]').value,
-            subject: this.querySelector('input[name="subject"]').value,
-            message: this.querySelector('textarea[name="message"]').value
-        };
+            // Remove any existing error messages
+            const existingErrors = document.querySelectorAll('.error-message');
+            existingErrors.forEach(error => error.remove());
 
-        // Validate form
-        if (!validateForm(formData)) {
-            return;
-        }
+            // Validate form fields
+            const name = this.querySelector('#name').value.trim();
+            const email = this.querySelector('#email').value.trim();
+            const message = this.querySelector('#message').value.trim();
 
-        // Show loading state
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
+            let isValid = true;
+            let errorMessage = '';
 
-        // Simulate form submission (replace with actual API call)
-        setTimeout(() => {
-            // Reset form
-            contactForm.reset();
-            
-            // Show success message
-            showMessage('Message sent successfully!', 'success');
-            
-            // Reset button
-            submitBtn.textContent = 'Send Message';
-            submitBtn.disabled = false;
-        }, 1500);
-    });
+            if (!name) {
+                errorMessage = 'Please enter your name';
+                isValid = false;
+            } else if (!email) {
+                errorMessage = 'Please enter your email';
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                errorMessage = 'Please enter a valid email address';
+                isValid = false;
+            } else if (!message) {
+                errorMessage = 'Please enter your message';
+                isValid = false;
+            }
 
-    // Form validation
-    function validateForm(data) {
-        let isValid = true;
+            if (!isValid) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = errorMessage;
+                this.insertBefore(errorDiv, this.firstChild);
+                return false;
+            }
+
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('https://formspree.io/f/mjkwkwoz', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        message: message
+                    })
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    showMessage('Message sent successfully!', 'success');
+                    // Reset form
+                    contactForm.reset();
+                } else {
+                    throw new Error('Failed to send message');
+                }
+            } catch (error) {
+                showMessage('Failed to send message. Please try again.', 'error');
+            } finally {
+                // Reset button state
+                submitBtn.textContent = 'Send Message';
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
+    // Email validation function
+    function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!data.name.trim()) {
-            showMessage('Please enter your name', 'error');
-            isValid = false;
-        }
-
-        if (!data.email.trim() || !emailRegex.test(data.email)) {
-            showMessage('Please enter a valid email address', 'error');
-            isValid = false;
-        }
-
-        if (!data.subject.trim()) {
-            showMessage('Please enter a subject', 'error');
-            isValid = false;
-        }
-
-        if (!data.message.trim()) {
-            showMessage('Please enter your message', 'error');
-            isValid = false;
-        }
-
-        return isValid;
+        return emailRegex.test(email);
     }
 
     // Show message function
